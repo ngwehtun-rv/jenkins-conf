@@ -1,14 +1,14 @@
-def checkoutToJenkinsConfRepo() {
-    def branch = 'develop'
-    def repoUrl = 'https://github.com/ngwehtun-rv/jenkins-conf.git'
-    def credentialsId = 'hiki-github-cred'
+// def checkoutToJenkinsConfRepo() {
+//     def branch = 'develop'
+//     def repoUrl = 'https://github.com/ngwehtun-rv/jenkins-conf.git'
+//     def credentialsId = 'hiki-github-cred'
 
-    checkout([
-        $class: 'GitSCM',
-        branches: [[name: "*/${branch}"]],
-        userRemoteConfigs: [[url: repoUrl, credentialsId: credentialsId]]
-    ])
-}
+//     checkout([
+//         $class: 'GitSCM',
+//         branches: [[name: "*/${branch}"]],
+//         userRemoteConfigs: [[url: repoUrl, credentialsId: credentialsId]]
+//     ])
+// }
 
 def checkoutToXDRRepo(branch, path) {
     def repoUrl = 'https://github.com/ngwehtun-rv/xdr-research.git'
@@ -30,7 +30,9 @@ def checkoutToXDRRepo(branch, path) {
     ])
 }
 
-return [
-    xdrRepo: this.&checkoutToXDRRepo,
-    confRepo: this.&checkoutToJenkinsConfRepo
-]
+// return [
+//     xdrRepo: this.&checkoutToXDRRepo,
+//     confRepo: this.&checkoutToJenkinsConfRepo
+// ]
+
+return this
