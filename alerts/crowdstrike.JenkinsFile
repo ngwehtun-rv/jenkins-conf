@@ -12,11 +12,21 @@ pipeline {
 
     stages {
 
+        // Load groovy script
+        stage('Load Groovy Script') {
+            steps {
+                script {
+                    def publisher = load './publish.groovy'
+                    def checkoutRepo = load './checkout.groovy'
+                }
+            }
+        }
+
         // Clone the project
         stage('Clone the project') {
             steps {
                 script {
-                    def checkoutRepo = load './checkout.groovy'
+                    // def checkoutRepo = load './checkout.groovy'
                     checkoutRepo.checkoutToXDRRepo('feature/pipeline-action-test', 'apps/alertbase')
                 }
             }
@@ -35,7 +45,7 @@ pipeline {
         stage('Publishing built image') {
             steps {
                 script {
-                    def publisher = load './publish.groovy'
+                    // def publisher = load './publish.groovy'
                     publisher.publishDockerImage(env.IMAGE_NAME, env.IMAGE_TAG)
                 }
             }
