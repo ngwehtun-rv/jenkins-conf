@@ -3,8 +3,11 @@ pipeline {
     agent any
 
     environment {
-        BRANCH = 'feature/pipeline-action-test'
+        IMAGE_TAG = "dev"
+        IMAGE_NAME = "crowdstrike"
+        PROJECT_NAME = "crowdstrike"
         FOLDER_PATH = 'apps/alertbase'
+        BRANCH = 'feature/pipeline-action-test'
     }
 
     stages {
@@ -13,8 +16,6 @@ pipeline {
         stage('Clone the project') {
             steps {
                 script {
-                    echo "Current Workspace: ${pwd()}"
-                    sh "ls -la ${pwd()}"
                     def checkoutRepo = load './checkout.groovy'
                     checkoutRepo.checkoutToXDRRepo('feature/pipeline-action-test', 'apps/alertbase')
                 }
@@ -25,9 +26,16 @@ pipeline {
         stage('Building docker image') {
             steps {
                 dir('apps/alertbase') {
-                    sh './local-build.sh -n=crowdstrike:dev -p=crowdstrike'
-                    sh 'docker images'
+                    sh "./local-build.sh -n=${env.IMAGE_NAME}:${env.IMAGE_TAG} -p=${env.PROJECT_NAME}"
                 }
+            }
+        }
+
+        // Publishing built image
+        stage('Publishing built image') {
+            steps {
+                def publisher = load './publish.groovy'
+                publisher.publishDockerImage(env.IMAGE_NAME, env.IMAGE_TAG)
             }
         }
     }
