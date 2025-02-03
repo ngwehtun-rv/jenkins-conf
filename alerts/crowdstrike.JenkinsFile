@@ -15,7 +15,7 @@ pipeline {
                 script {
                     echo "Current Workspace: ${pwd()}"
                     sh "ls -la ${pwd()}"
-                    def checkoutRepo = load 'checkout.groovy'
+                    def checkoutRepo = load './checkout.groovy'
                     checkoutRepo.checkoutToXDRRepo(env.BRANCH, env.FOLDER_PATH)
                 }
             }
