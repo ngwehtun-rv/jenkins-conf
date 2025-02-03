@@ -34,8 +34,10 @@ pipeline {
         // Publishing built image
         stage('Publishing built image') {
             steps {
-                def publisher = load './publish.groovy'
-                publisher.publishDockerImage(env.IMAGE_NAME, env.IMAGE_TAG)
+                script {
+                    def publisher = load './publish.groovy'
+                    publisher.publishDockerImage(env.IMAGE_NAME, env.IMAGE_TAG)
+                }
             }
         }
     }
