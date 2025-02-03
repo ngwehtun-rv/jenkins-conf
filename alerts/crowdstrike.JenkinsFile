@@ -9,6 +9,13 @@ pipeline {
 
     stages {
 
+        // Clean workspacce
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+            }
+        }
+
         // Clone the project
         stage('Clone the project') {
             steps {
