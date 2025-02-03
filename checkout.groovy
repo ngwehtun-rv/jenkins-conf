@@ -28,12 +28,6 @@ def checkoutToXDRRepo(branch, path) {
             credentialsId: 'hiki-github-cred'
         ]]
     ])
-
-    checkout([
-        $class: 'GitSCM',
-        branches: [[name: "*/${branch}"]],
-        userRemoteConfigs: [[url: repoUrl, credentialsId: credentialsId]]
-    ])
 }
 
 return [
