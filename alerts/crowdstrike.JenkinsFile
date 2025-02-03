@@ -1,5 +1,3 @@
-def checkoutRepo = load '../checkout.groovy'
-
 pipeline {
 
     agent any
@@ -16,6 +14,7 @@ pipeline {
             steps {
                 script {
                     node {
+                        def checkoutRepo = load '../checkout.groovy'
                         checkoutRepo.checkoutToXDRRepo(env.BRANCH, env.FOLDER_PATH)
                     }
                 }
