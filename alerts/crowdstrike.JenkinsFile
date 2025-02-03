@@ -12,7 +12,6 @@ pipeline {
         // Clone the project
         stage('Clone the project') {
             steps {
-                cleanWs()
                 script {
                     node {
                         def checkoutRepo = load '../checkout.groovy'
