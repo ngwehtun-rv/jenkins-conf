@@ -16,8 +16,10 @@ pipeline {
         stage('Clone the project') {
             steps {
                 script {
-                    def checkoutRepo = load './checkout.groovy'
-                    checkoutRepo.checkoutToXDRRepo('feature/pipeline-action-test', 'apps/alertbase')
+                    dir('repo') {
+                        def checkoutRepo = load './checkout.groovy'
+                        checkoutRepo.checkoutToXDRRepo('feature/pipeline-action-test', 'apps/alertbase')
+                    }
                 }
             }
         }
@@ -25,7 +27,8 @@ pipeline {
         // Building the project
         stage('Building docker image') {
             steps {
-                dir('apps/alertbase') {
+                sh 'ls -lah'
+                dir('repo/apps/alertbase') {
                     sh "./local-build.sh -n=${env.IMAGE_NAME}:${env.IMAGE_TAG} -p=${env.PROJECT_NAME}"
                 }
             }
