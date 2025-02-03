@@ -15,7 +15,9 @@ pipeline {
         stage('Clone the project') {
             steps {
                 script {
-                    checkoutRepo.checkoutToXDRRepo(env.BRANCH, env.FOLDER_PATH)
+                    node {
+                        checkoutRepo.checkoutToXDRRepo(env.BRANCH, env.FOLDER_PATH)
+                    }
                 }
             }
         }
