@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     dir('repo') {
-                        def checkoutRepo = load './checkout.groovy'
+                        def checkoutRepo = load '../checkout.groovy'
                         checkoutRepo.checkoutToXDRRepo('feature/pipeline-action-test', 'apps/alertbase')
                     }
                 }
