@@ -1,0 +1,33 @@
+def checkoutRepo = load '../checkout.groovy'
+
+pipeline {
+
+    agent any
+
+    environment {
+        BRANCH = 'feature/pipeline-action-test'
+        FOLDER_PATH = 'apps/alertbase'
+    }
+
+    stages {
+
+        // Clone the project
+        stage('Clone the project') {
+            steps {
+                script {
+                    checkoutRepo.checkoutToXDRRepo(env.BRANCH, env.FOLDER_PATH)
+                }
+            }
+        }
+
+        // Building the project
+        stage('Building docker image') {
+            steps {
+                dir('apps/alertbase') {
+                    sh './local-build.sh -n=crowdstrike:dev -p=crowdstrike'
+                    sh 'docker images'
+                }
+            }
+        }
+    }
+}
