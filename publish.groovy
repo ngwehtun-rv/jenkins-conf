@@ -4,6 +4,7 @@ def publishDockerImage(String imageName, String tag) {
     def fullImageName = "${dockerHubUsername}/${imageName}:${tag}"
 
     withDockerRegistry([credentialsId: credentialsId]) {
+        sh "docker tag ${imageName}:${tag} ${fullImageName}"
         sh "docker push ${fullImageName}"
     }
 
