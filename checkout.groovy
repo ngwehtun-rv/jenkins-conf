@@ -31,6 +31,6 @@ def checkoutToXDRRepo(branch, path) {
 }
 
 return [
-    xdrRepo: checkoutToXDRRepo,
-    confRepo: checkoutToJenkinsConfRepo
+    xdrRepo: this.&checkoutToXDRRepo,
+    confRepo: this.&checkoutToJenkinsConfRepo
 ]
