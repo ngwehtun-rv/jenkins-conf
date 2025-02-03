@@ -15,7 +15,7 @@ pipeline {
                 cleanWs()
                 script {
                     node {
-                        def checkoutRepo = load './checkout.groovy'
+                        def checkoutRepo = load '../checkout.groovy'
                         checkoutRepo.checkoutToXDRRepo(env.BRANCH, env.FOLDER_PATH)
                     }
                 }
