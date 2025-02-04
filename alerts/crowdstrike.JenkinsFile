@@ -12,7 +12,7 @@ pipeline {
 
     stages {
 
-        // Clone the project
+        // Clone the project using groovy func
         stage('Clone the project') {
             steps {
                 script {
