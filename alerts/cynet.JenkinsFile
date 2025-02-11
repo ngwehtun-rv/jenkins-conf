@@ -4,8 +4,8 @@ pipeline {
 
     environment {
         IMAGE_TAG = "dev"
-        IMAGE_NAME = "crowdstrike"
-        PROJECT_NAME = "crowdstrike"
+        IMAGE_NAME = "cynet"
+        PROJECT_NAME = "cynet"
         FOLDER_PATH = 'apps/alertbase'
         BRANCH = 'feature/pipeline-action-test'
     }
