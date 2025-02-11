@@ -2,6 +2,10 @@ pipeline {
 
     agent any
 
+    parameters {
+        string(name: 'BRANCH', defaultValue: 'dev', description: 'Branch to deploy')
+    }
+
     environment {
         IMAGE_TAG = "dev"
         IMAGE_NAME = "cynet"
@@ -16,6 +20,7 @@ pipeline {
         stage('Clone the project') {
             steps {
                 script {
+                    echo "Deploying branch: ${params.BRANCH}"
                     dir('repo') {
                         def checkoutRepo = load '../checkout.groovy'
                         checkoutRepo.checkoutToXDRRepo('feature/pipeline-action-test', 'apps/alertbase')
